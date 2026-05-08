@@ -38,15 +38,16 @@ function CreatePage() {
       if (!el) return;
       const mod = await import("html2pdf.js");
       const html2pdf = mod.default || (mod as any);
+      const opts: any = {
+        margin: 0,
+        filename: `${(data.fullName || "biodata").replace(/\s+/g, "_")}_biodata.pdf`,
+        image: { type: "jpeg", quality: 0.98 },
+        html2canvas: { scale: 2, useCORS: true, backgroundColor: "#ffffff" },
+        jsPDF: { unit: "mm", format: "a4", orientation: "portrait" },
+        pagebreak: { mode: ["avoid-all", "css", "legacy"] },
+      };
       await html2pdf()
-        .set({
-          margin: 0,
-          filename: `${(data.fullName || "biodata").replace(/\s+/g, "_")}_biodata.pdf`,
-          image: { type: "jpeg", quality: 0.98 },
-          html2canvas: { scale: 2, useCORS: true, backgroundColor: "#ffffff" },
-          jsPDF: { unit: "mm", format: "a4", orientation: "portrait" },
-          pagebreak: { mode: ["avoid-all", "css", "legacy"] },
-        })
+        .set(opts)
         .from(el)
         .save();
       toast.success("Biodata downloaded");
