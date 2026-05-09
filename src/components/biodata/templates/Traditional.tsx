@@ -37,7 +37,7 @@ export function TraditionalTemplate({ data }: { data: Biodata }) {
         <div className="text-center">
           <div className="font-display text-2xl text-[#7a1f2b]">|| श्री गणेशाय नमः ||</div>
           <div className="mx-auto mt-2 h-px w-40 bg-[#c9a14a]" />
-          <h1 className="mt-3 font-display text-3xl tracking-wide text-[#7a1f2b]">Marriage Biodata</h1>
+          <h1 className="mt-3 font-display text-3xl tracking-wide text-[#7a1f2b]">Biodata</h1>
         </div>
 
         <div className="mt-6 grid gap-6 md:grid-cols-[1fr_180px]">

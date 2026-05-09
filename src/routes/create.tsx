@@ -13,7 +13,7 @@ export const Route = createFileRoute("/create")({
   head: () => ({
     meta: [
       { title: "Create Your Biodata — Free Biodata for Hindus" },
-      { name: "description", content: "Fill in your details and watch your Hindu marriage biodata come to life with a real-time preview." },
+      { name: "description", content: "Fill in your details and watch your Hindu biodata come to life with a real-time preview." },
     ],
   }),
   component: CreatePage,

@@ -26,7 +26,7 @@ export function ModernTemplate({ data }: { data: Biodata }) {
     <div className="mx-auto w-full max-w-[800px] bg-white p-10 text-neutral-900 shadow-md ring-1 ring-neutral-200" style={{ fontFamily: "'Fira Sans', sans-serif" }}>
       <div className="flex items-start justify-between gap-8">
         <div>
-          <p className="text-[11px] uppercase tracking-[0.3em] text-[#7a1f2b]">Marriage Biodata</p>
+          <p className="text-[11px] uppercase tracking-[0.3em] text-[#7a1f2b]">Biodata</p>
           <h1 className="mt-3 font-display text-4xl leading-tight text-neutral-900">{data.fullName || "Your Name"}</h1>
           <p className="mt-2 text-sm text-neutral-500">
             {[data.occupation, data.nativePlace].filter(Boolean).join(" · ")}

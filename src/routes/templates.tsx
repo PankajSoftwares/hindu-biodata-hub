@@ -8,7 +8,7 @@ export const Route = createFileRoute("/templates")({
   head: () => ({
     meta: [
       { title: "Biodata Templates — Free Biodata for Hindus" },
-      { name: "description", content: "Browse traditional, modern, and elegant Hindu marriage biodata templates. Free to use, no watermark." },
+      { name: "description", content: "Browse traditional, modern, and elegant Hindu biodata templates. Free to use, no watermark." },
     ],
   }),
   component: TemplatesPage,
