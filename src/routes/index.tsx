@@ -8,8 +8,8 @@ import { sampleBiodata, TEMPLATES } from "@/lib/biodata";
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "Free Biodata for Hindus — Create Beautiful Marriage Biodata" },
-      { name: "description", content: "Make a stunning Hindu marriage biodata in minutes. Free templates, live preview, instant PDF download. No watermark, no signup." },
+      { title: "Free Biodata for Hindus — Create Beautiful Biodata" },
+      { name: "description", content: "Make a stunning Hindu biodata in minutes. Free templates, live preview, instant PDF download. No watermark, no signup." },
     ],
   }),
   component: Home,
