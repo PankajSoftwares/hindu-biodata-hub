@@ -33,7 +33,7 @@ export function ElegantTemplate({ data }: { data: Biodata }) {
             <PhotoBox photo={data.photo} />
           </div>
           <div className="text-center md:text-left">
-            <p className="font-display italic text-[#7a1f2b]">~ Marriage Biodata ~</p>
+            <p className="font-display italic text-[#7a1f2b]">~ Biodata ~</p>
             <h1 className="mt-2 font-display text-4xl text-[#5a1620]">{data.fullName || "Your Name"}</h1>
             <p className="mt-2 text-sm text-[#6b4a2a]">
               {[data.education, data.occupation].filter(Boolean).join(" · ")}
