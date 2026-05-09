@@ -19,7 +19,7 @@ function AboutPage() {
       <div className="mt-6 space-y-5 text-base leading-relaxed text-foreground/85">
         <p>
           Free Biodata for Hindus was created with one simple goal — to make it easy
-          for every family to put together a beautiful marriage biodata, without
+          for every family to put together a beautiful biodata, without
           paying a rupee or fighting with confusing software.
         </p>
         <p>

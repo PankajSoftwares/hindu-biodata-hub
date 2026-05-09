@@ -8,7 +8,7 @@ export function Footer() {
         <div className="md:col-span-2">
           <Logo />
           <p className="mt-4 max-w-sm text-sm text-muted-foreground">
-            Create beautiful Hindu marriage biodata for free. Multiple templates,
+            Create beautiful Hindu biodata for free. Multiple templates,
             instant PDF download, no watermark, no signup required.
           </p>
         </div>
