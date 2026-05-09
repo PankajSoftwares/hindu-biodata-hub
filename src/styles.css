@@ -7,29 +7,40 @@
 @theme inline {
   --font-display: "DM Serif Display", ui-serif, Georgia, serif;
   --font-sans: "Fira Sans", ui-sans-serif, system-ui, sans-serif;
+
   --radius-sm: calc(var(--radius) - 4px);
   --radius-md: calc(var(--radius) - 2px);
   --radius-lg: var(--radius);
   --radius-xl: calc(var(--radius) + 4px);
   --radius-2xl: calc(var(--radius) + 8px);
+
   --color-background: var(--background);
   --color-foreground: var(--foreground);
+
   --color-card: var(--card);
   --color-card-foreground: var(--card-foreground);
+
   --color-popover: var(--popover);
   --color-popover-foreground: var(--popover-foreground);
+
   --color-primary: var(--primary);
   --color-primary-foreground: var(--primary-foreground);
+
   --color-secondary: var(--secondary);
   --color-secondary-foreground: var(--secondary-foreground);
+
   --color-muted: var(--muted);
   --color-muted-foreground: var(--muted-foreground);
+
   --color-accent: var(--accent);
   --color-accent-foreground: var(--accent-foreground);
+
   --color-gold: var(--gold);
   --color-gold-foreground: var(--gold-foreground);
+
   --color-destructive: var(--destructive);
   --color-destructive-foreground: var(--destructive-foreground);
+
   --color-border: var(--border);
   --color-input: var(--input);
   --color-ring: var(--ring);
@@ -37,86 +48,146 @@
 
 :root {
   --radius: 0.75rem;
-  /* Cream paper */
-  --background: oklch(0.984 0.012 80);
-  --foreground: oklch(0.18 0.02 30);
-  --card: oklch(0.995 0.006 80);
-  --card-foreground: oklch(0.18 0.02 30);
-  --popover: oklch(0.995 0.006 80);
-  --popover-foreground: oklch(0.18 0.02 30);
+
+  /* Cream Paper Theme */
+  --background: #fdf8f1;
+  --foreground: #3b2a24;
+
+  --card: #fffdf9;
+  --card-foreground: #3b2a24;
+
+  --popover: #fffdf9;
+  --popover-foreground: #3b2a24;
+
   /* Maroon */
-  --primary: oklch(0.38 0.12 18);
-  --primary-foreground: oklch(0.98 0.012 80);
-  --secondary: oklch(0.94 0.02 60);
-  --secondary-foreground: oklch(0.25 0.05 25);
-  --muted: oklch(0.94 0.015 70);
-  --muted-foreground: oklch(0.45 0.03 40);
-  --accent: oklch(0.92 0.04 70);
-  --accent-foreground: oklch(0.25 0.05 25);
+  --primary: #6b1f1f;
+  --primary-foreground: #fffaf5;
+
+  --secondary: #f3ece3;
+  --secondary-foreground: #4b2e2e;
+
+  --muted: #efe7dc;
+  --muted-foreground: #6a5a4a;
+
+  --accent: #f0e0c2;
+  --accent-foreground: #4b2e2e;
+
   /* Gold */
-  --gold: oklch(0.74 0.12 80);
-  --gold-foreground: oklch(0.18 0.02 30);
-  --destructive: oklch(0.55 0.22 27);
-  --destructive-foreground: oklch(0.98 0 0);
-  --border: oklch(0.88 0.02 70);
-  --input: oklch(0.9 0.018 70);
-  --ring: oklch(0.74 0.12 80);
+  --gold: #d4a017;
+  --gold-foreground: #3b2a24;
+
+  --destructive: #dc2626;
+  --destructive-foreground: #ffffff;
+
+  --border: #e5d5c0;
+  --input: #ede0cf;
+  --ring: #d4a017;
 }
 
 .dark {
-  --background: oklch(0.16 0.02 30);
-  --foreground: oklch(0.96 0.01 80);
-  --card: oklch(0.22 0.03 25);
-  --card-foreground: oklch(0.96 0.01 80);
-  --popover: oklch(0.22 0.03 25);
-  --popover-foreground: oklch(0.96 0.01 80);
-  --primary: oklch(0.55 0.16 20);
-  --primary-foreground: oklch(0.98 0.012 80);
-  --secondary: oklch(0.28 0.03 30);
-  --secondary-foreground: oklch(0.96 0.01 80);
-  --muted: oklch(0.26 0.025 30);
-  --muted-foreground: oklch(0.7 0.02 60);
-  --accent: oklch(0.32 0.05 40);
-  --accent-foreground: oklch(0.96 0.01 80);
-  --gold: oklch(0.78 0.13 80);
-  --gold-foreground: oklch(0.18 0.02 30);
-  --destructive: oklch(0.65 0.22 27);
-  --destructive-foreground: oklch(0.98 0 0);
-  --border: oklch(1 0 0 / 12%);
-  --input: oklch(1 0 0 / 15%);
-  --ring: oklch(0.78 0.13 80);
+  --background: #2b1d1b;
+  --foreground: #f8f4ed;
+
+  --card: #382523;
+  --card-foreground: #f8f4ed;
+
+  --popover: #382523;
+  --popover-foreground: #f8f4ed;
+
+  --primary: #a83232;
+  --primary-foreground: #fffaf5;
+
+  --secondary: #463230;
+  --secondary-foreground: #f8f4ed;
+
+  --muted: #40302e;
+  --muted-foreground: #c2b2a2;
+
+  --accent: #5a4038;
+  --accent-foreground: #f8f4ed;
+
+  --gold: #e0b84f;
+  --gold-foreground: #2b1d1b;
+
+  --destructive: #ef4444;
+  --destructive-foreground: #ffffff;
+
+  --border: rgba(255, 255, 255, 0.12);
+  --input: rgba(255, 255, 255, 0.15);
+
+  --ring: #e0b84f;
 }
 
 @layer base {
-  * { border-color: var(--color-border); }
-  html { scroll-behavior: smooth; }
+  * {
+    border-color: var(--color-border);
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
   body {
     background-color: var(--color-background);
     color: var(--color-foreground);
     font-family: var(--font-sans);
     font-feature-settings: "ss01", "cv11";
   }
-  h1, h2, h3, h4, .font-display { font-family: var(--font-display); letter-spacing: -0.01em; }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  .font-display {
+    font-family: var(--font-display);
+    letter-spacing: -0.01em;
+  }
 }
 
 @layer utilities {
   .gold-divider {
     height: 1px;
-    background: linear-gradient(90deg, transparent, var(--gold) 20%, var(--gold) 80%, transparent);
+    background: linear-gradient(
+      90deg,
+      transparent,
+      var(--gold) 20%,
+      var(--gold) 80%,
+      transparent
+    );
   }
+
   .glass {
-    background: color-mix(in oklab, var(--card) 70%, transparent);
+    background: rgba(255, 255, 255, 0.7);
     backdrop-filter: blur(12px);
-    border: 1px solid color-mix(in oklab, var(--gold) 25%, transparent);
+    border: 1px solid rgba(212, 160, 23, 0.25);
   }
-  .text-gold { color: var(--gold); }
-  .bg-gold { background-color: var(--gold); }
-  .border-gold { border-color: var(--gold); }
+
+  .text-gold {
+    color: var(--gold);
+  }
+
+  .bg-gold {
+    background-color: var(--gold);
+  }
+
+  .border-gold {
+    border-color: var(--gold);
+  }
 }
 
-/* Print: only show the active biodata template */
+/* Print: only show active biodata template */
 @media print {
-  body * { visibility: hidden; }
-  #biodata-print, #biodata-print * { visibility: visible; }
-  #biodata-print { position: absolute; inset: 0; }
+  body * {
+    visibility: hidden;
+  }
+
+  #biodata-print,
+  #biodata-print * {
+    visibility: visible;
+  }
+
+  #biodata-print {
+    position: absolute;
+    inset: 0;
+  }
 }
