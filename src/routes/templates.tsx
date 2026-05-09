@@ -2,7 +2,9 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { BiodataPreview } from "@/components/biodata/BiodataPreview";
-import { sampleBiodata, TEMPLATES } from "@/lib/biodata";
+import { sampleDoc, TEMPLATES } from "@/lib/biodata";
+
+const SAMPLE = sampleDoc();
 
 export const Route = createFileRoute("/templates")({
   head: () => ({
@@ -37,7 +39,7 @@ function TemplatesPage() {
           >
             <div className="relative aspect-[3/4] overflow-hidden bg-[#eee5d3]/40">
               <div className="absolute inset-0 origin-top-left scale-[0.45] p-2">
-                <BiodataPreview data={sampleBiodata} template={t.id} />
+                <BiodataPreview doc={SAMPLE} template={t.id} />
               </div>
             </div>
             <div className="p-5">

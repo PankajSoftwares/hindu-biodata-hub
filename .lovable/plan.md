@@ -1,48 +1,83 @@
-# Free Biodata for Hindus — MVP Plan
+## Goal
+Turn the biodata editor into a flexible, SaaS-style form builder: every field optional, toggleable visibility, custom user-added fields, drag-and-drop reordering across sections, optional photo, and templates that adapt automatically.
 
-A polished, mobile-first biodata maker with a traditional Maroon & Gold aesthetic, DM Serif Display + Fira Sans typography. Frontend-only, browser local storage, English. Production-ready foundation we can extend later (Hindi/Kannada, AI suggestions, cloud sync, QR sharing, more templates).
+## Data model changes (`src/lib/biodata.ts`)
 
-## What ships in this pass
+Introduce a new structure alongside the existing `Biodata` type:
 
-### Pages (TanStack routes)
-- `/` — Home: hero with CTA, animated template previews, feature grid, how-it-works, testimonials, FAQ, footer
-- `/templates` — Template gallery with preview cards (filter by style)
-- `/create` — Two-pane editor: form on left, **live preview** on right (stacks on mobile, with a Preview toggle)
-- `/about`, `/contact`, `/privacy`, `/terms` — Static content pages
+```ts
+type FieldId = string; // e.g. "fullName", "custom_abc123"
+type SectionId = "personal" | "religion" | "career" | "family" | "horoscope" | "lifestyle" | "contact";
 
-### Editor — form sections
-Personal • Contact • Family • Education & Career • Horoscope • Lifestyle & Expectations. All fields from your spec included. Drag-and-drop profile photo upload (stored as base64 in local storage). Section-by-section progress indicator. Smart validation (zod). Auto-save to `localStorage` on every change with a "Last saved" indicator.
+type FieldDef = {
+  id: FieldId;
+  label: string;        // editable for custom, fixed for built-in (but renameable)
+  value: string;
+  visible: boolean;
+  multiline?: boolean;
+  custom?: boolean;     // user-added
+  kind?: "text" | "date" | "email" | "photo";
+};
 
-### Live preview & templates (3 to start)
-1. **Traditional** — maroon header band, gold ornamental divider, Ganesh motif, serif headings
-2. **Modern Minimal** — clean grid, generous whitespace, subtle accent rule
-3. **Elegant Premium** — champagne background, gold borders, two-column layout
+type Section = {
+  id: SectionId;
+  label: string;
+  fieldIds: FieldId[];
+};
 
-Each template renders the same biodata data dynamically. Theme color picker (3 presets) + heading font toggle.
+type BiodataDoc = {
+  fields: Record<FieldId, FieldDef>;
+  sections: Section[];
+  photo?: { value: string; visible: boolean };
+};
+```
 
-### PDF export
-`html2pdf.js` to render the active template at A4, no watermark, one-click download. Print stylesheet for browser print.
+Provide migration: convert existing flat `Biodata` into `BiodataDoc` on load (idempotent).
 
-### UX polish
-- Framer Motion: page fade-ins, template card hover lift, section reveals
-- Glassmorphism feature cards, soft shadows, gold hairline dividers
-- Dark mode toggle (editor + site chrome; templates stay print-light)
-- Fully responsive, tested at mobile/tablet/desktop
-- SEO meta per route, semantic HTML, lazy-loaded template thumbnails
+## Editor (`src/components/biodata/BiodataForm.tsx` rewrite)
 
-## Design system
-- Palette tokens in `src/styles.css` (oklch): background `#fdf8f1`, primary maroon `#7a1f2b`, accent gold `#c9a14a`, foreground `#1a1a1a`, plus dark-mode equivalents
-- Fonts: DM Serif Display (headings) + Fira Sans (body) via Google Fonts
-- Reusable shadcn components themed to tokens; no hardcoded colors
+- Sections rendered as collapsible cards.
+- Each field row:
+  - Drag handle (move within / across sections)
+  - Eye toggle (show/hide)
+  - Inline-editable label (contenteditable input)
+  - Value input (textarea if multiline)
+  - Trash button (custom fields only) / hide button (built-in)
+- Per-section "Add More Details" button → spawns custom field with editable label + value.
+- Photo card at top: upload, remove, visibility toggle.
+- Drag-and-drop powered by `@dnd-kit/core` + `@dnd-kit/sortable` (install).
 
-## Technical notes
-- Stack stays on the project's TanStack Start + Tailwind v4 + shadcn (not Next.js — equivalent capability)
-- State: local React state in editor, persisted via a tiny `useBiodataDraft` hook backed by `localStorage`
-- PDF: dynamic import `html2pdf.js` only on the editor route to keep initial bundle lean
-- File layout: `src/routes/*` for pages, `src/components/biodata/{Form,Preview,templates/*}`, `src/components/site/{Header,Footer,...}`, `src/lib/biodata-schema.ts`
+## Templates (`Traditional`, `Modern`, `Elegant`)
 
-## Explicitly deferred (next iterations)
-Hindi/Kannada i18n, AI suggestions, QR code share, share-via-link, cloud accounts, additional templates, animated onboarding walkthrough. Architecture leaves clean seams for each.
+Refactor to iterate over `doc.sections` → `section.fieldIds` → render only `visible && value.trim()`. Skip empty sections entirely. Photo column collapses to single-column when hidden/missing. Custom fields render exactly like built-ins using `field.label` + `field.value`.
 
-## Deliverable
-A polished, working MVP — real sample data, no broken buttons, PDF download works end-to-end, deployable as-is.
+Shared `shared.tsx` row helpers updated to accept `(label, value)` pairs derived from the new doc.
+
+## Hook (`useBiodataDraft`)
+
+- Stores `BiodataDoc` instead of flat `Biodata`.
+- Migrates old localStorage payload on first load.
+- Exposes: `toggleField`, `renameField`, `setValue`, `addCustomField(sectionId)`, `removeField`, `moveField(fieldId, toSection, toIndex)`, `setPhoto`, `togglePhoto`.
+
+## PDF export
+
+No changes needed — it already snapshots the rendered preview, which now respects visibility.
+
+## Hydration fix (drive-by)
+
+Fix the SSR mismatch on the home hero ("Hindu Marriage" vs "Hindu") — leftover stale prerender; ensure hero text is just "Hindu" everywhere.
+
+## Out of scope (this pass)
+- Reordering sections themselves (only fields move between/within sections).
+- Adding/removing entire custom sections.
+- Multi-language labels.
+
+## Files touched
+- `src/lib/biodata.ts` (new doc model + migration)
+- `src/hooks/use-biodata-draft.ts` (rewrite around doc)
+- `src/components/biodata/BiodataForm.tsx` (rewrite as field-builder)
+- `src/components/biodata/PhotoDropzone.tsx` (add visibility toggle + remove)
+- `src/components/biodata/templates/{Traditional,Modern,Elegant,shared}.tsx` (data-driven render)
+- `src/routes/create.tsx` (wire new hook API)
+- `src/routes/index.tsx` (hero text fix if needed)
+- `package.json` (+ `@dnd-kit/core`, `@dnd-kit/sortable`, `@dnd-kit/utilities`)

@@ -3,7 +3,9 @@ import { motion } from "framer-motion";
 import { ArrowRight, CheckCircle2, Download, Heart, ImageIcon, Layers, Lock, Palette, Smartphone, Sparkles, Wand2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { BiodataPreview } from "@/components/biodata/BiodataPreview";
-import { sampleBiodata, TEMPLATES } from "@/lib/biodata";
+import { sampleDoc, TEMPLATES } from "@/lib/biodata";
+
+const SAMPLE = sampleDoc();
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -85,7 +87,7 @@ function Hero() {
         >
           <div className="absolute -inset-6 -z-10 rounded-3xl bg-gradient-to-br from-primary/15 via-gold/10 to-transparent blur-2xl" />
           <div className="origin-top-left scale-[0.7] sm:scale-[0.78] md:scale-[0.62] lg:scale-[0.7] xl:scale-[0.8]">
-            <BiodataPreview data={sampleBiodata} template="traditional" />
+            <BiodataPreview doc={SAMPLE} template="traditional" />
           </div>
         </motion.div>
       </div>
@@ -155,7 +157,7 @@ function TemplatePreviews() {
           >
             <div className="relative aspect-[3/4] overflow-hidden bg-[#eee5d3]/40">
               <div className="absolute inset-0 origin-top-left scale-[0.42] p-2">
-                <BiodataPreview data={sampleBiodata} template={t.id} />
+                <BiodataPreview doc={SAMPLE} template={t.id} />
               </div>
             </div>
             <div className="p-4">
