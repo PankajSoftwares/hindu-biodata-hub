@@ -30,7 +30,7 @@ export function Footer() {
         </div>
       </div>
       <div className="border-t border-border/60 py-5 text-center text-xs text-muted-foreground">
-        © {new Date().getFullYear()} Free Biodata for Hindus. Made with care.
+        © {new Date().getFullYear()} Free Biodata for Hindu Marriage. Made with care by Pooja Pankaj Sharma for Jyoti Kr.
       </div>
     </footer>
   );
